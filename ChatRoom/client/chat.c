@@ -3,9 +3,9 @@
  * 2016-5-5 wl实现
 ***************************************************************/
 
-#include"config.h"
+#include"client.h"
 
-void recvMsg(int *sockfd);
+
 int personalRet;
 /************************************************************
  * 函数名：enterChat
@@ -17,8 +17,8 @@ int personalRet;
 void enterChat(User *user,int sockfd)
 {
 	char choice[20];
-	int ret,len;
-	char c,buf[MAX_LINE],str[MAX_LINE];
+	int ret, len;
+	char buf[MAX_LINE];
 	Message personal;
 	
 	Message message;
@@ -167,10 +167,7 @@ void enterChat(User *user,int sockfd)
 				//exit(1);
 				break;
 		}//switch
-		
-		
 	}	
-	
 }
 
 
@@ -181,8 +178,6 @@ void recvMsg(int *sockfd)
 	int connfd = *sockfd;
 	char buf[MAX_LINE] , str[MAX_LINE];
 	Message message;
-	
-	time_t timep;
 
 	while(1)
 	{

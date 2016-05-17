@@ -3,7 +3,7 @@
  * 2016-5-4 wl实现
 ***********************************************************/
 
-#include"config.h"
+#include"client.h"
 
 /******************************
  * 函数名：main
@@ -17,7 +17,6 @@ int main(int argc,char *argv[])
 	int sockfd,ret,n;
 	char choice[20];
 	struct sockaddr_in servaddr;
-	struct hostent *host;
 	
 	//声明消息变量
 	Message message;
@@ -133,7 +132,7 @@ int main(int argc,char *argv[])
 			default:
 				printf("unknow operation.\n");
 				close(sockfd);
-				return;
+				return 1;
 				break;
 		}
 	}

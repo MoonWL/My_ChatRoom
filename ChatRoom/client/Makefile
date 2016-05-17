@@ -1,28 +1,28 @@
 MYNAME = makefile
-CC = gcc
+CC = gcc -std=c11 -Wall -D_XOPEN_SOURCE
 
 objects = client.o config.o register.o login.o interface.o chat.o
 
 server: $(objects)
-	cc -g -o client $(objects)  -lpthread
+	$(CC) -g -o client $(objects)  -lpthread
 
 client.o: client.c config.h
-	cc -c client.c 
+	$(CC) -c client.c 
 
 register.o: register.c config.h
-	cc -c register.c
+	$(CC) -c register.c
 
 login.o: login.c config.h
-	cc -c login.c
+	$(CC) -c login.c
 
 interface.o: interface.c config.h
-	cc -c interface.c
+	$(CC) -c interface.c
 
 chat.o: chat.c config.h
-	cc -c chat.c
+	$(CC) -c chat.c
 
 config.o: config.c config.h
-	cc -c config.c
+	$(CC) -c config.c
 #比较稳健的clean做法，表示clean是一个伪目标
 .PHONY: clean
 
