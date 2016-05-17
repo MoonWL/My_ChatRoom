@@ -61,15 +61,14 @@ char *stateMsg(int stateRet)
 参数：user1--目标拷贝对象 user2--源拷贝对象
 返回值：无
 **************************************/
-void copyUser(User *user1 , User *user2)
+void copyUser(User *userDes , User *userSrc)
 {
-	strcpy((*user1).userName , (*user2).userName);
-	strcpy((*user1).password , (*user2).password);
-	(*user1).userAddr = (*user2).userAddr;
-	(*user1).sockfd = (*user2).sockfd;
-	(*user1).speak = (*user2).speak;
-	strcpy((*user2).registerTime , (*user2).registerTime);
-
+	strcpy(userDes->userName , userSrc->userName);
+	strcpy(userDes->password , userSrc->password);
+	userDes->userAddr = userSrc->userAddr;
+	userDes->sockfd = userSrc->sockfd;
+	userDes->speak = userSrc->speak;
+	strcpy(userDes->registerTime , userSrc->registerTime);
 }
 
 ssize_t readn(int fd, void *ptr, size_t n)

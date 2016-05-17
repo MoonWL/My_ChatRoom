@@ -106,7 +106,7 @@ ListNode *userList;
  * config.c
  */
 char *stateMsg(int stateRet);
-void copyUser(User *user1 , User *user2);
+void copyUser(User *userDes , User *userSrc);
 ssize_t writen(int fd, const void *ptr, size_t n);
 ssize_t readn(int fd, void *ptr, size_t n);
 
