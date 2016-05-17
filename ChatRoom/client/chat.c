@@ -34,7 +34,7 @@ void enterChat(User *user,int sockfd)
 		exit(1);
 	}
 	
-	chatInterface((*user).userName);
+	chatInterface(user->userName);
 	while(1)
 	{
 		fflush(stdin);
@@ -56,13 +56,13 @@ void enterChat(User *user,int sockfd)
 		{
 			case 1: /*查看当前在线用户列表*/
 				message.msgType = VIEW_USER_LIST;
-				strcpy(message.sendName,(*user).userName);
+				strcpy(message.sendName, user->userName);
 				memcpy(buf , &message , sizeof(message));
 				writen(sockfd , buf , sizeof(message));						
 				break;
 			
 			case 2://进入群聊模式
-				groupInterface((*user).userName,sockfd);
+				groupInterface(user->userName, sockfd);
 				getchar();
 				sleep(1);
 				printf("正在建立聊天连接...\n");
@@ -76,11 +76,11 @@ void enterChat(User *user,int sockfd)
 				if(strcmp(message.content,"q!\n") == 0){
 					//退出群聊模式
 					printf("已退出群聊模式！\n");
-					chatInterface((*user).userName);
+					chatInterface(user->userName);
 					break;
 				}
 				//printf("\n");
-				strcpy(message.sendName,(*user).userName);
+				strcpy(message.sendName, user->userName);
 				strcpy(message.recvName , "");
 				
 				/*获得当前时间*/
@@ -92,7 +92,7 @@ void enterChat(User *user,int sockfd)
 				goto group;
 			
 			case 3: //进入私聊模式
-				personalInterface((*user).userName,sockfd);
+				personalInterface(user->userName, sockfd);
 				sleep(1);
 				getchar();
 				while(1){
@@ -111,19 +111,19 @@ void enterChat(User *user,int sockfd)
 					len = strlen(personal.content);
 					personal.content[len-1] = 0;
 					personal.msgType = PERSONAL;
-					memset(buf,0,MAX_LINE);
-				    memcpy(buf,&personal,sizeof(personal));
-					writen(sockfd,buf,sizeof(personal));//发送聊天对象
+					memset(buf, 0, MAX_LINE);
+				    memcpy(buf, &personal, sizeof(personal));
+					writen(sockfd, buf, sizeof(personal));//发送聊天对象
 					printf("正在建立聊天连接...\n");
 					//与消息线程冲突
 					sleep(1);
 					//printf("接受聊天对象成功！\n");
 					if(personalRet == ALREADY_ONLINE )
 					{
-						if(strcmp(personal.content,(*user).userName) == 0)
+						if(strcmp(personal.content, user->userName) == 0)
 							printf("\033[;31m聊天对象不能为自己！\033[0m\n\n");
 						else  {
-							printf("正在与 \033[;31m%s\033[0m 聊天！\n\n",personal.content);
+							printf("正在与 \033[;31m%s\033[0m 聊天！\n\n", personal.content);
 							break;
 						}							
 					}
@@ -141,11 +141,11 @@ void enterChat(User *user,int sockfd)
 				if(strcmp(message.content,"q!\n") == 0){
 					//退出私聊模式
 					printf("已退出私聊模式！\n");
-		quit:		chatInterface((*user).userName);
+		quit:		chatInterface(user->userName);
 					break;
 				}
 				//printf("\n");
-				strcpy(message.sendName,(*user).userName);
+				strcpy(message.sendName, user->userName);
 				strcpy(message.recvName , personal.content);
 				/*获得当前时间*/
 				time(&timep);
@@ -157,7 +157,7 @@ void enterChat(User *user,int sockfd)
 		
 			 case 4:
 				message.msgType = EXIT;
-				strcpy(message.sendName,(*user).userName);
+				strcpy(message.sendName, user->userName);
 				memcpy(buf , &message , sizeof(message));
 				writen(sockfd , buf , sizeof(message));
 				pthread_join(pid,NULL);

@@ -6,22 +6,22 @@ objects = client.o config.o register.o login.o interface.o chat.o
 server: $(objects)
 	$(CC) -g -o client $(objects)  -lpthread
 
-client.o: client.c config.h
+client.o: client.c
 	$(CC) -c client.c 
 
-register.o: register.c config.h
+register.o: register.c
 	$(CC) -c register.c
 
-login.o: login.c config.h
+login.o: login.c
 	$(CC) -c login.c
 
-interface.o: interface.c config.h
+interface.o: interface.c
 	$(CC) -c interface.c
 
-chat.o: chat.c config.h
+chat.o: chat.c
 	$(CC) -c chat.c
 
-config.o: config.c config.h
+config.o: config.c
 	$(CC) -c config.c
 #比较稳健的clean做法，表示clean是一个伪目标
 .PHONY: clean
