@@ -1,3 +1,6 @@
+#ifndef _CLIENT_H_
+#define _CLIENT_H_
+
 /*******************************************************************************
 * 客户端基本配置文件 -- 包含所需头文件
 * 用户信息结构体定义
@@ -7,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 #include <memory.h> /*使用memcpy所需的头文件*/
 
@@ -98,11 +102,38 @@ typedef struct _ListNode{
 /*定义在线用户链表*/
 ListNode *userList;
 
-extern char *stateMsg(int stateRet);
-extern void copyUser(User *user1 , User *user2);
+/*
+ * config.c
+ */
+char *stateMsg(int stateRet);
+void copyUser(User *user1 , User *user2);
 ssize_t writen(int fd, const void *ptr, size_t n);
 ssize_t readn(int fd, void *ptr, size_t n);
 
-extern int mainInterface();
-extern int helpInterface();
+/*
+ * interface.c
+ */
+int mainInterface();
+int helpInterface();
+void chatInterface(char userName[]);
+void groupInterface(char userName[],int sockfd);
+void personalInterface(char userName[],int sockfd);
 
+/*
+ * chat.c
+ */
+void recvMsg(int *sockfd);
+void enterChat(User *user,int sockfd);
+
+/*
+ * login.c
+ */
+int loginUser(int sockfd); 
+
+/*
+ * register.c
+ */
+int registerUser(int sockfd);
+
+
+#endif

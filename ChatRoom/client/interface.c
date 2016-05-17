@@ -3,7 +3,7 @@
  * 2016-5-4 wl设计
 *******************************************************/
 
-#include"config.h"
+#include"client.h"
 
 /*******************************************************
  * 函数名：mainInterface
@@ -21,6 +21,7 @@ int mainInterface()
 	printf("\033[;31m                                3.帮助                     \033[0m\n");
 	printf("\033[;31m                                4.退出                     \033[0m\n");
 	printf("\033[;31m               --------------------------------------------\033[0m\n");
+	return 0;
 }
 
 int helpInterface()
@@ -48,6 +49,7 @@ int helpInterface()
 		//setbuf(stdin,NULL);//设置标准输入不带缓冲
 	}
 	system("clear");
+	return 0;
 }
 
 

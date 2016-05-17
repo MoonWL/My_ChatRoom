@@ -3,7 +3,7 @@
  * 2016-5-5 wl实现
 ***********************************************************/
 
-#include"config.h"
+#include"client.h"
 
 /*******************************************************
  * 函数名：loginUser
@@ -14,7 +14,6 @@
 
 int loginUser(int sockfd)
 {
-	int ret;
 	//声明用户登录信息
 	User user;
 	char buf[MAX_LINE];

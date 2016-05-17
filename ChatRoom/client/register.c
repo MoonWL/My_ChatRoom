@@ -3,7 +3,7 @@
  * 2016-5-4 wl实现
 *****************************************************/
 
-#include"config.h"
+#include"client.h"
 
 /******************************************************
  * 函数名：registeruser
@@ -14,7 +14,7 @@
 
 int registerUser(int sockfd)
 {
-	int ret,n;
+	int n;
 	
 	//声明用户注册信息
 	User user;
